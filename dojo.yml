@@ -10,5 +10,5 @@ award:
 comparator: 9993
 
 modules:
-  - id: kernel-baby
+  - id: kernel-security
     icon: 0016_Pidgey
