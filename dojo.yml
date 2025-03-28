@@ -1,0 +1,14 @@
+id: kernel-security
+
+name: Kernel Security
+
+type: course
+
+award:
+  emoji: 0001_Bulbasaur
+
+comparator: 9993
+
+modules:
+  - id: kernel-baby
+    icon: 0016_Pidgey
