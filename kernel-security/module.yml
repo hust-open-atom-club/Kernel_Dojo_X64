@@ -1,9 +1,6 @@
 name: 内核安全
   
 challenges:
-  - id: level-1-0
-    name: Level 1.0
-    level: 4
 
   - id: vm
     name: 教学关卡(VM 连接)
