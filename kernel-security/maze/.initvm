@@ -1,3 +1,7 @@
+mkdir -p /mnt/hostroot
+echo "[*] Mounting /hostroot 9p share..."
+mount -t 9p -o trans=virtio,version=9p2000.L,msize=1048576,ro /hostroot /mnt/hostroot || echo "[!] Failed to mount /hostroot"
+
 # --- BEGIN Mount host root and copy flag --- 
 HOST_ROOT_MOUNT_POINT="/mnt/hostroot"
 HOST_ROOT_TAG="/hostroot"
