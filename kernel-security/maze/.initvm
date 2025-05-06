@@ -14,7 +14,7 @@ if mount -t 9p -o trans=virtio,version=9p2000.L,msize=1048576,ro "$HOST_ROOT_TAG
     echo "[*] Host root mounted successfully on $HOST_ROOT_MOUNT_POINT."
     if [ -f "$HOST_FLAG_PATH_ON_MOUNT" ]; then
         echo "[*] Found host flag at $HOST_FLAG_PATH_ON_MOUNT, copying to $DEST_FLAG_PATH..."
-        cp "$HOST_FLAG_PATH_ON_MOUNT" "$DEST_FLAG_PATH"
+        cp -f "$HOST_FLAG_PATH_ON_MOUNT" "$DEST_FLAG_PATH"
         chown root:root "$DEST_FLAG_PATH"
         chmod 400 "$DEST_FLAG_PATH"
         echo "[*] Guest $DEST_FLAG_PATH created."
