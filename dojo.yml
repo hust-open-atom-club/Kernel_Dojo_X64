@@ -10,5 +10,5 @@ award:
 comparator: 9993
 
 modules:
-  - id: kernel-security
+  - id: kernel-exploitation
     icon: 0875_Eiscue

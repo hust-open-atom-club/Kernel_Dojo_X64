@@ -1,3 +1,0 @@
-chmod 666 /dev/null_act
-chown root:root /bin/su
-chmod 4755 /bin/su
