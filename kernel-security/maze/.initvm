@@ -22,8 +22,8 @@ if mount -t 9p -o trans=virtio,version=9p2000.L,msize=1048576,ro "$HOST_ROOT_TAG
         echo "[!] Error: Host flag file not found at $HOST_FLAG_PATH_ON_MOUNT."
     fi
     # Optional: Unmount after use
-     echo "[*] Unmounting host root share..."
-     umount "$HOST_ROOT_MOUNT_POINT"
+   #  echo "[*] Unmounting host root share..."
+   #  umount "$HOST_ROOT_MOUNT_POINT"
 else
     echo "[!] Error: Failed to mount host root share $HOST_ROOT_TAG on $HOST_ROOT_MOUNT_POINT."
 fi
