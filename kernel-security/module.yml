@@ -10,6 +10,10 @@ challenges:
     name: challenge nullptr
     level: 3
 
+  - id: nullptr2
+    name: challenge nullptr2
+    level: 3
+
   - id: snow
     name: challenge snow
     level: 4
