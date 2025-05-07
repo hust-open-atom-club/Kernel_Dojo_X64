@@ -1,31 +1,13 @@
-mkdir -p /mnt/hostroot
-echo "[*] Mounting /hostroot 9p share..."
-mount -t 9p -o trans=virtio,version=9p2000.L,msize=1048576,ro /hostroot /mnt/hostroot || echo "[!] Failed to mount /hostroot"
-
-# --- BEGIN Mount host root and copy flag --- 
-HOST_ROOT_MOUNT_POINT="/mnt/hostroot"
-HOST_ROOT_TAG="/hostroot"
-HOST_FLAG_PATH_ON_MOUNT="$HOST_ROOT_MOUNT_POINT/flag"
+FW_CFG_PATH="/sys/firmware/qemu_fw_cfg/by_name/opt/guest/flag_content/raw"
 DEST_FLAG_PATH="/flag"
 
-echo "[*] Attempting to mount host root share ($HOST_ROOT_TAG)..."
-mkdir -p "$HOST_ROOT_MOUNT_POINT"
-if mount -t 9p -o trans=virtio,version=9p2000.L,msize=1048576,ro "$HOST_ROOT_TAG" "$HOST_ROOT_MOUNT_POINT"; then
-    echo "[*] Host root mounted successfully on $HOST_ROOT_MOUNT_POINT."
-    if [ -f "$HOST_FLAG_PATH_ON_MOUNT" ]; then
-        echo "[*] Found host flag at $HOST_FLAG_PATH_ON_MOUNT, copying to $DEST_FLAG_PATH..."
-        cp -f "$HOST_FLAG_PATH_ON_MOUNT" "$DEST_FLAG_PATH"
-        chown root:root "$DEST_FLAG_PATH"
-        chmod 400 "$DEST_FLAG_PATH"
-        echo "[*] Guest $DEST_FLAG_PATH created."
-    else
-        echo "[!] Error: Host flag file not found at $HOST_FLAG_PATH_ON_MOUNT."
-    fi
-    # Optional: Unmount after use
-   #  echo "[*] Unmounting host root share..."
-   #  umount "$HOST_ROOT_MOUNT_POINT"
-else
-    echo "[!] Error: Failed to mount host root share $HOST_ROOT_TAG on $HOST_ROOT_MOUNT_POINT."
-fi
-# --- END Mount host root and copy flag --- 
+if [ -e "$FW_CFG_PATH" ]; then
+    cp "$FW_CFG_PATH" "$DEST_FLAG_PATH"
 
+    chown root:root "$DEST_FLAG_PATH"
+    chmod 400 "$DEST_FLAG_PATH"
+
+    echo "Guest $DEST_FLAG_PATH created from fw_cfg."
+else
+    echo "Error: fw_cfg entry for flag not found at $FW_CFG_PATH."
+fi
